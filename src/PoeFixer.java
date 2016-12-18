@@ -22,7 +22,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class PoeFixer {
-	private List<String> extraResourcesInStringArray = new ArrayList<>();
+	private List<String> extraResourcesInStringArray = new ArrayList<String>();
 
 	public void addExtraResourceString(String resourceInString) {
 		extraResourcesInStringArray.add(resourceInString);

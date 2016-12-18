@@ -13,17 +13,23 @@ public class Main {
 			//	<item>Herr</item>
 			//	<item>Frau</item>
 			//</string-array>
-			fixer.addExtraResourceString("<string-array name=\"mcy_alphacomm_register_gender_list\">\n" + "<item>Herr</item>\n"
-					+ "<item>Frau</item>\n" + "</string-array>\n");
+			fixer.addExtraResourceString(
+					"<string-array name=\"mcy_alphacomm_register_gender_list\">\n" 
+						+ "<item>Herr</item>\n"
+						+ "<item>Frau</item>\n"
+					+ "</string-array>");
 			// Add Resource 2 
 			//<string-array name="mcy_transfer_landing_dialog_choose_amount_items">
 			//	<item>3 Euro Guthaben übertragen</item>
 			//	<item>5 Euro Guthaben übertragen</item>
 			//	<item>10 Euro Guthaben übertragen</item>
 			//</string-array>
-			fixer.addExtraResourceString("<string-array name=\"mcy_transfer_landing_dialog_choose_amount_items\">"
-					+ "<item>3 Euro Guthaben übertragen</item>\n" + "<item>5 Euro Guthaben übertragen</item>\n"
-					+ "<item>10 Euro Guthaben übertragen</item>\n" + "</string-array>\n\n");
+			fixer.addExtraResourceString(
+					"<string-array name=\"mcy_transfer_landing_dialog_choose_amount_items\">"
+						+ "<item>3 Euro Guthaben übertragen</item>\n" 
+						+ "<item>5 Euro Guthaben übertragen</item>\n"
+						+ "<item>10 Euro Guthaben übertragen</item>\n" 
+					+ "</string-array>");
 			// Start Fixing the xml
 			fixer.fix(new File(srcFilePath), new File(destFilePath));
 		} catch (Exception e) {
