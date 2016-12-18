@@ -1,6 +1,8 @@
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,14 +22,17 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class PoeFixer {
-	private static String[] EXTRA_RESOURCES_ARRAY = new String[] {
-			"<string-array name=\"mcy_alphacomm_register_gender_list\">\n" + "<item>Herr</item>\n"
-					+ "<item>Frau</item>\n" + "</string-array>\n",
-			"<string-array name=\"mcy_transfer_landing_dialog_choose_amount_items\">"
-					+ "<item>3 Euro Guthaben übertragen</item>\n" + "<item>5 Euro Guthaben übertragen</item>\n"
-					+ "<item>10 Euro Guthaben übertragen</item>\n" + "</string-array>\n\n" };
+	private List<String> extraResourcesInStringArray = new ArrayList<>();
 
-	public static void fix(File srcFile, File destFile) throws Exception {
+	public void addExtraResourceString(String resourceInString) {
+		extraResourcesInStringArray.add(resourceInString);
+	}
+	
+	public void clearExtraResourceStringArray(){
+		extraResourcesInStringArray.clear();
+	}
+
+	public void fix(File srcFile, File destFile) throws Exception {
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 		Document doc = docBuilder.parse(srcFile);
@@ -52,12 +57,14 @@ public class PoeFixer {
 			}
 		}
 		// add new resources
-		for (String childNodeString : EXTRA_RESOURCES_ARRAY) {
+		for (String childNodeString : extraResourcesInStringArray) {
 			addStringChildNode(docBuilder, doc, childNodeString);
 		}
 		printXmlDocument(doc, destFile);
 	}
 
+	// -------------------->
+	
 	private static void addStringChildNode(DocumentBuilder docBuilder, Document doc, String childNodeString)
 			throws SAXException, IOException {
 		Document extraResourcesDoc = docBuilder.parse(new ByteArrayInputStream(childNodeString.getBytes()));
@@ -99,9 +106,5 @@ public class PoeFixer {
 
 	private static boolean isStringEmpty(String string) {
 		return string == null || string.trim().isEmpty();
-	}
-
-	private static void logError(Exception e) {
-		e.printStackTrace();
 	}
 }
