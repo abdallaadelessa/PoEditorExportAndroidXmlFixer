@@ -22,7 +22,12 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class PoeFixer {
+	private String encoding = "UTF-8";
 	private List<String> extraResourcesInStringArray = new ArrayList<String>();
+
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
+	}
 
 	public void addExtraResourceString(String resourceInString) {
 		extraResourcesInStringArray.add(resourceInString);
@@ -58,16 +63,16 @@ public class PoeFixer {
 		}
 		// add new resources
 		for (String childNodeString : extraResourcesInStringArray) {
-			addStringChildNode(docBuilder, doc, childNodeString);
+			addStringChildNode(docBuilder, doc, childNodeString, encoding);
 		}
 		printXmlDocument(doc, destFile);
 	}
 
 	// -------------------->
 
-	private static void addStringChildNode(DocumentBuilder docBuilder, Document doc, String childNodeString)
-			throws SAXException, IOException {
-		Document extraResourcesDoc = docBuilder.parse(new ByteArrayInputStream(childNodeString.getBytes("UTF-8")));
+	private static void addStringChildNode(DocumentBuilder docBuilder, Document doc, String childNodeString,
+			String encoding) throws SAXException, IOException {
+		Document extraResourcesDoc = docBuilder.parse(new ByteArrayInputStream(childNodeString.getBytes(encoding)));
 		Node extraResourcesNode = doc.importNode(extraResourcesDoc.getDocumentElement(), true);
 		doc.getDocumentElement().appendChild(extraResourcesNode);
 	}
