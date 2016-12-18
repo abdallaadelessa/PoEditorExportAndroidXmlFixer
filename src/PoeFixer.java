@@ -27,8 +27,8 @@ public class PoeFixer {
 	public void addExtraResourceString(String resourceInString) {
 		extraResourcesInStringArray.add(resourceInString);
 	}
-	
-	public void clearExtraResourceStringArray(){
+
+	public void clearExtraResourceStringArray() {
 		extraResourcesInStringArray.clear();
 	}
 
@@ -64,10 +64,10 @@ public class PoeFixer {
 	}
 
 	// -------------------->
-	
+
 	private static void addStringChildNode(DocumentBuilder docBuilder, Document doc, String childNodeString)
 			throws SAXException, IOException {
-		Document extraResourcesDoc = docBuilder.parse(new ByteArrayInputStream(childNodeString.getBytes()));
+		Document extraResourcesDoc = docBuilder.parse(new ByteArrayInputStream(childNodeString.getBytes("UTF-8")));
 		Node extraResourcesNode = doc.importNode(extraResourcesDoc.getDocumentElement(), true);
 		doc.getDocumentElement().appendChild(extraResourcesNode);
 	}
