@@ -94,8 +94,8 @@ public class PoeFixer {
 	private static String fixValue(String value) {
 		if (!isStringEmpty(value)) {
 			value = value.trim();
-			value = value.indexOf('\"') == 0 ? value.replaceFirst("\"", "") : value;
-			value = value.lastIndexOf('\"') == value.length() - 1 ? value.substring(0, value.length() - 1) : value;
+		//	value = value.indexOf('\"') == 0 ? value.replaceFirst("\"", "") : value;
+		//	value = value.lastIndexOf('\"') == value.length() - 1 ? value.substring(0, value.length() - 1) : value;
 			value = value.replaceAll("'", "\\\\'");
 			value = value.replaceAll("‘", "\\\\‘");
 			int count = 1;
